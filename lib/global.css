@@ -1,0 +1,34 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --enhancedocs-primary-base: #3663eb;
+
+  --enhancedocs-neutral-lighten3: #F7FAFF;
+  --enhancedocs-neutral-lighten2: #DEE9FF;
+  --enhancedocs-neutral-lighten1: #BECEED;
+  --enhancedocs-neutral-base: #8798BA;
+  --enhancedocs-neutral-darken1: #626F87;
+  --enhancedocs-neutral-darken2: #3D4554;
+  --enhancedocs-neutral-darken3: #181B21;
+  --enhancedocs-white: #FFFFFF;
+  --enhancedocs-black: #000000;
+  --enhancedocs-white-rgb: 250, 250, 250;
+  --enhancedocs-black-rgb: 0, 0, 0;
+
+  --enhancedocs-success-base: #4BBB69;
+}
+
+:root.dark,
+[data-theme='dark']:root {
+  --enhancedocs-neutral-lighten3: #181B21;
+  --enhancedocs-neutral-lighten2: #3D4554;
+  --enhancedocs-neutral-lighten1: #626F87;
+  --enhancedocs-neutral-base: #8798BA;
+  --enhancedocs-neutral-darken1: #BECEED;
+  --enhancedocs-neutral-darken2: #DEE9FF;
+  --enhancedocs-neutral-darken3: #F7FAFF;
+  --enhancedocs-white: #000000;
+  --enhancedocs-black: #FFFFFF;
+  --enhancedocs-white-rgb: 0, 0, 0;
+  --enhancedocs-black-rgb: 250, 250, 250;
+}
