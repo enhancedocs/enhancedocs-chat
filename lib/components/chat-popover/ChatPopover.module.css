@@ -1,26 +1,36 @@
 .EnhancedChat__ChatPopover {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  min-width: 200px;
-  min-height: 200px;
+  bottom: 20px;
+  right: 20px;
+  width: 370px;
+  height: 600px;
+  max-width: calc(100% - 40px);
+  max-height: calc(100% - 40px);
+  display: none;
+  flex-direction: column;
+  color: var(--enhancedocs-black);
   background: var(--enhancedocs-neutral-lighten3);
-  padding: 16px;
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .25);
   opacity: 0;
   z-index: -1;
   animation-duration: 0.3s;
 }
 
 .EnhancedChat__ChatPopoverVisible {
-  opacity: 1;
+  display: flex;
   z-index: 1;
   animation-name: var(--animation-puffIn);
+  animation-fill-mode: forwards;
 }
 
 .EnhancedChat__ChatPopoverHidden {
-  opacity: 0;
   z-index: -1;
   animation-name: var(--animation-puffOut);
+  animation-fill-mode: forwards;
+}
+
+.EnhancedChat__ChatPopover_Content {
+  flex: 1;
+  padding: 16px;
 }

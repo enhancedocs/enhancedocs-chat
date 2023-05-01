@@ -1,18 +1,11 @@
-import Key from '../../../key/Key';
 import classes from './Footer.module.css';
 
 export default function Footer () {
   return (
     <footer className={classes.EnhancedSearch__SearchModal__Footer}>
-      <div>
-        <div className={classes.EnhancedSearch__SearchModal__FooterKey}>
-          <Key className={classes.EnhancedSearch__SearchModal__FooterCustomKey}>esc</Key>
-          to close
-        </div>
-      </div>
       <div className={classes.EnhancedSearch__SearchModal__FooterLogoContainer}>
         <span>
-          Search by
+          Powered by
         </span>
         <a
           className={classes.EnhancedSearch__SearchModal__FooterLink}

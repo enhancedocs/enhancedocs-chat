@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import useCustomTheme from './hooks/use-custom-theme';
 import useKeyDown from './hooks/use-key-down';
 import { classNames } from './helpers/styles';
@@ -27,6 +27,8 @@ export type Config = {
 
 export type Theme = {
   primaryColor?: string;
+  botName?: string;
+  logo?: ReactNode;
 }
 
 export type ChatProps = {
@@ -39,10 +41,10 @@ export type ChatProps = {
 
 export default function Chat ({
   config,
-  theme,
   size = 'middle',
   shape = 'round',
-  icon = 'chat'
+  icon = 'chat',
+  theme
 }: ChatProps) {
   const [isOpen, setIsOpen] = useState(false);
   const Icon = icons[icon] || MagicIcon;
@@ -73,6 +75,7 @@ export default function Chat ({
       </button>
       <ChatPopover
         config={config}
+        theme={theme}
         isOpen={isOpen}
         onClose={toggleChatPopover}
       />

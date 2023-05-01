@@ -1,15 +1,17 @@
 import { classNames } from '../../helpers/styles';
-import CloseIcon from '../../components/icons/CloseIcon';
-import type { Config } from '../../Chat';
+import type { Config, Theme } from '../../Chat';
+import Footer from './components/footer/Footer';
+import Header from './components/header/Header';
 import classes from './ChatPopover.module.css';
 
 type ChatPopoverProps = {
   config: Config;
+  theme?: Theme;
   isOpen: boolean;
   onClose?: () => void;
 }
 
-export default function ChatPopover ({ config, isOpen, onClose }: ChatPopoverProps) {
+export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPopoverProps) {
   return (
     <div
       className={
@@ -20,9 +22,11 @@ export default function ChatPopover ({ config, isOpen, onClose }: ChatPopoverPro
         )
       }
     >
-      <div onClick={onClose}>
-        <CloseIcon />
-      </div>
+      <Header theme={theme} onClose={onClose} />
+      <section className={classes.EnhancedChat__ChatPopover_Content}>
+        Hello World
+      </section>
+      <Footer />
     </div>
   );
 }
