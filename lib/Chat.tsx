@@ -2,11 +2,22 @@ import { useState } from 'react';
 import useCustomTheme from './hooks/use-custom-theme';
 import useKeyDown from './hooks/use-key-down';
 import { classNames } from './helpers/styles';
-import CloseIcon from './components/icons/CloseIcon';
 import MagicIcon from './components/icons/MagicIcon';
+import RobotIcon from './components/icons/RobotIcon';
+import HelpIcon from './components/icons/HelpIcon';
+import ChatIcon from './components/icons/ChatIcon';
+import SmilyChatIcon from './components/icons/SmilyChatIcon';
 import ChatPopover from './components/chat-popover/ChatPopover';
 import classes from './Chat.module.css';
 import './global.css';
+
+const icons = {
+  magic: MagicIcon,
+  robot: RobotIcon,
+  help: HelpIcon,
+  chat: ChatIcon,
+  smilyChat: SmilyChatIcon
+};
 
 export type Config = {
   projectId: string;
@@ -23,15 +34,18 @@ export type ChatProps = {
   theme?: Theme;
   size?: 'small' | 'middle' | 'large';
   shape?: 'square' | 'round';
+  icon?: 'magic' | 'robot' | 'help' | 'chat' | 'smilyChat';
 }
 
 export default function Chat ({
   config,
   theme,
   size = 'middle',
-  shape = 'round'
+  shape = 'round',
+  icon = 'chat'
 }: ChatProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const Icon = icons[icon] || MagicIcon;
 
   function toggleChatPopover() {
     setIsOpen((prevOpen) => !prevOpen);
@@ -48,12 +62,14 @@ export default function Chat ({
           classNames(
             classes.EnhancedChat,
             classes[`EnhancedChat__${size}`],
-            classes[`EnhancedChat__${shape}`]
+            classes[`EnhancedChat__${shape}`],
+            isOpen && classes.EnhancedChat__Hidden,
+            !isOpen && classes.EnhancedChat__Visible
           )
         }
         onClick={toggleChatPopover}
       >
-        {isOpen ? <CloseIcon /> : <MagicIcon />}
+        <Icon />
       </button>
       <ChatPopover
         config={config}
