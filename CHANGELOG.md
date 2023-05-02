@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.9] - 2023-05-02
+
+- 🆕 Use chat history to get enhanced answers ([#4](https://github.com/enhancedocs/enhancedocs-chat/issues/4)).
+
 ## [0.0.8] - 2023-05-02
 
 - 🐞 Popover z-index.
