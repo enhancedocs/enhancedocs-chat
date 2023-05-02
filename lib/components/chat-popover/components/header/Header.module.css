@@ -1,0 +1,31 @@
+.EnhancedChat__ChatPopover_Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--enhancedocs-white);
+  border-radius: 16px 16px 0 0;
+  font-size: 20px;
+}
+
+.EnhancedChat__ChatPopover_InnerHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.EnhancedChat__ChatPopover_InnerHeader svg,
+.EnhancedChat__ChatPopover_InnerHeader > :first-child {
+  width: 32px;
+}
+
+.EnhancedChat__ChatPopover_LogoLetters {
+  fill: var(--enhancedocs-black);
+  stroke: var(--enhancedocs-black);
+}
+
+.EnhancedChat__ChatPopover_CloseIcon {
+  display: flex;
+  color: var(--enhancedocs-neutral-darken2);
+  cursor: pointer;
+}

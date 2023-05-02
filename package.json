@@ -1,7 +1,7 @@
 {
   "name": "enhancedocs-chat",
   "description": "EnhanceDocs Chat",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "Apache-2.0",
   "author": "EnhanceDocs",
   "contributors": [
@@ -44,8 +44,7 @@
     "react-dom": "^17.x || ^18.x"
   },
   "dependencies": {
-    "react-markdown": "^8.0.6",
-    "react-modal": "^3.16.1"
+    "react-markdown": "^8.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",

@@ -1,0 +1,45 @@
+.EnhancedChat__ChatPopover__HistoryContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.EnhancedChat__ChatPopover__HistoryItem {
+  width: fit-content;
+  max-width: -webkit-fill-available;
+  overflow-x: auto;
+  background: var(--enhancedocs-white);
+  padding: 8px 16px;
+  border-radius: 24px 24px 24px 4px;
+  margin-bottom: 4px;
+  align-self: flex-start;
+}
+
+.EnhancedChat__ChatPopover__HistoryItemHuman {
+  background: var(--enhancedocs-primary-base);
+  color: white;
+  margin: 16px 0;
+  border-radius: 24px 24px 4px 24px;
+  align-self: flex-end;
+}
+
+.EnhancedChat__ChatPopover__MarkdownCode {
+  display: block;
+  background: var(--enhancedocs-neutral-lighten2);
+  padding: 8px;
+  border-radius: 4px;
+  margin: 8px 0;
+  overflow-x: scroll;
+}
+
+.EnhancedChat__ChatPopover__MarkdownLink {
+  text-decoration: auto;
+  color: var(--enhancedocs-primary-base);
+}
+
+.EnhancedChat__ChatPopover__MarkdownLink:hover {
+  text-decoration: underline;
+}
+
+.EnhancedChat__ChatPopover__MarkdownParagraph {
+  margin: 4px 0;
+}

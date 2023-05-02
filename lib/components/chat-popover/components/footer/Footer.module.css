@@ -1,0 +1,26 @@
+.EnhancedSearch__SearchModal__Footer {
+  padding: 12px;
+  background: var(--enhancedocs-white);
+  border-radius: 0 0 16px 16px;
+}
+
+.EnhancedSearch__SearchModal__FooterLogoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.EnhancedSearch__SearchModal__FooterLogo {
+  width: 100px;
+}
+
+.EnhancedSearch__SearchModal__FooterLink {
+  line-height: 1px;
+}
+
+.EnhancedSearch__SearchModal__FooterLogo__Letters {
+  fill: var(--enhancedocs-black);
+  stroke: var(--enhancedocs-black);
+}
