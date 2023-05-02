@@ -41,7 +41,7 @@
 .EnhancedChat__ChatPopover_ContentHistory {
   flex: 1;
   padding: 16px;
-  max-height: 400px;
+  max-height: 426px;
   font-size: 14px;
   overflow-y: auto;
   scroll-behavior: smooth;
