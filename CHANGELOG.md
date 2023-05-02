@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.11] - 2023-05-02
+
+- 🐞 Filter initial history item without mutating original history list.
+
 ## [0.0.10] - 2023-05-02
 
 - 🆕 Get enhanced answers as stream ([#2](https://github.com/enhancedocs/enhancedocs-chat/issues/2)).

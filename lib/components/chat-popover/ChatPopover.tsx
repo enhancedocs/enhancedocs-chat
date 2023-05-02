@@ -7,15 +7,8 @@ import { getAnswers, getAnswersWithHistory } from './services/answers';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import History from './components/history/History';
+import { INITIAL_HISTORY_ID, formatHistory } from './helpers';
 import classes from './ChatPopover.module.css';
-
-function formatHistory (history: Array<HistoryItem>) {
-  history.shift(); // Remove initial AI history item.
-  return history.map((historyItem) => {
-    const prefix = historyItem.origin == 'ai' ? 'AI: ' : 'Human: ';
-    return `${prefix}${historyItem.value}`;
-  });
-}
 
 export type HistoryItem = {
   _id: string;
@@ -33,7 +26,7 @@ type ChatPopoverProps = {
 
 const INITIAL_HISTORY: Array<HistoryItem> = [
   {
-    _id: 'ai-0',
+    _id: INITIAL_HISTORY_ID,
     value: 'Hi! I\'m EnhanceDocs AI Assistant. Nice to meet you! 👋  \nSearch the docs or ask a question...',
     sources: [],
     origin: 'ai'
