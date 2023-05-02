@@ -19,15 +19,18 @@ type GetAnswersWithHistory = {
   history?: Array<string>;
 }
 
-export function getAnswers ({ config, search }: GetAnswers): Promise<AnswerType> {
-  let url = `/ask?question=${search}`;
+export function getAnswers ({ config, search }: GetAnswers): Promise<any> {
+  let url = `/ask/stream?question=${search}`;
   if (config.projectId) url = `${url}&projectId=${config.projectId}`;
 
-  return Get(url, config, { headers: { Authorization: `Bearer ${config.accessToken}` } });
+  return Get(url, config, {
+    headers: { Authorization: `Bearer ${config.accessToken}` },
+    stream: true
+  });
 }
 
-export function getAnswersWithHistory ({ config, search, history }: GetAnswersWithHistory): Promise<AnswerType> {
-  let url = '/ask';
+export function getAnswersWithHistory ({ config, search, history }: GetAnswersWithHistory): Promise<any> {
+  let url = '/ask/stream';
   if (config.projectId) url = `${url}?projectId=${config.projectId}`;
 
   return Post(url, config, {
@@ -39,6 +42,7 @@ export function getAnswersWithHistory ({ config, search, history }: GetAnswersWi
     body: JSON.stringify({
       question: search,
       history
-    })
+    }),
+    stream: true
   });
 }
