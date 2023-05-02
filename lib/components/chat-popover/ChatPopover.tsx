@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { classNames } from '../../helpers/styles';
 import type { Config, Theme } from '../../Chat';
 import SendIcon from '../icons/SendIcon';
@@ -96,7 +97,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
     }
   }, [history.length]);
 
-  return (
+  return createPortal(
     <div
       className={
         classNames(
@@ -156,6 +157,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
         </form>
       </section>
       <Footer />
-    </div>
+    </div>,
+    document.body
   );
 }
