@@ -79,21 +79,50 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
         });
 
         const withHistory = history.length > 1;
-        const data = withHistory
+        const response = withHistory
           ? await getAnswersWithHistory({ config, search, history: formatHistory(history) })
           : await getAnswers({ config, search });
 
-        setHistory((prevHistory) => {
-          return [
-            ...prevHistory,
-            {
-              _id: data._id || `ai-${prevHistory.length + 1}`,
-              value: data.answer,
-              sources: data.sources,
-              origin: 'ai'
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder('utf-8');
+        let result = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+
+          if (done) {
+            break;
+          }
+
+          result += decoder.decode(value);
+
+          const streamId = `ai-${history.length + 1}`;
+
+          setHistory((prevHistory) => {
+            const exists = prevHistory.find(({ _id }) => _id == streamId);
+            if (exists) {
+              return prevHistory.map((historyItem) => {
+                if (historyItem._id == streamId) {
+                  return { ...historyItem, value: result };
+                }
+                return historyItem;
+              });
             }
-          ];
-        });
+            return [
+              ...prevHistory,
+              {
+                _id: streamId,
+                value: result,
+                sources: [],
+                origin: 'ai'
+              }
+            ];
+          });
+
+          if (historyContainerRef.current) {
+            historyContainerRef.current.scrollTop = historyContainerRef.current.scrollHeight;
+          }
+        }
       }
     } catch(error) {
       console.error('Chat answers', error);
