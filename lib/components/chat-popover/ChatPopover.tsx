@@ -24,7 +24,7 @@ type ChatPopoverProps = {
 
 const INITIAL_HISTORY: Array<HistoryItem> = [
   {
-    _id: crypto.randomUUID(),
+    _id: 'ai-0',
     value: 'Hi! I\'m EnhanceDocs AI Assistant. Nice to meet you! 👋  \nSearch the docs or ask a question...',
     sources: [],
     origin: 'ai'
@@ -62,7 +62,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
           return [
             ...prevHistory,
             {
-              _id: crypto.randomUUID(),
+              _id: `human-${prevHistory.length + 1}`,
               value: search,
               origin: 'human'
             }
@@ -74,7 +74,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
           return [
             ...prevHistory,
             {
-              _id: data._id,
+              _id: data._id || `ai-${prevHistory.length + 1}`,
               value: data.answer,
               sources: data.sources,
               origin: 'ai'
