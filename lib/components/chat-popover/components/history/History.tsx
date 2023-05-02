@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy } from 'react';
 import { classNames } from '../../../../helpers/styles';
 import type { HistoryItem } from '../../ChatPopover';
 import classes from './History.module.css';
@@ -23,7 +23,7 @@ export default function History ({ history }: HistoryProps)  {
             }
             key={historyItem._id}
           >
-            <Suspense fallback={<></>}>
+            {ReactMarkdown && (
               <ReactMarkdown
                 components={{
                   code(props) {
@@ -39,7 +39,7 @@ export default function History ({ history }: HistoryProps)  {
               >
                 {historyItem.value}
               </ReactMarkdown>
-            </Suspense>
+            )}
           </div>
         );
       })}
