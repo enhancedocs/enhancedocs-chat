@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.10] - 2023-05-02
+
+- 🆕 Get enhanced answers as stream ([#2](https://github.com/enhancedocs/enhancedocs-chat/issues/2)).
+
 ## [0.0.9] - 2023-05-02
 
 - 🆕 Use chat history to get enhanced answers ([#4](https://github.com/enhancedocs/enhancedocs-chat/issues/4)).
