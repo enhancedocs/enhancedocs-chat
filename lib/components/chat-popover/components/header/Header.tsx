@@ -20,7 +20,7 @@ export default function Header ({ theme, onClose }: HeaderProps) {
             </svg>
           )
         }
-        <span>Chat with {theme?.botName || 'EnhanceDocs'}</span>
+        <span>Chat with {theme?.botName || 'AI Assistant'}</span>
       </div>
       <div className={classes.EnhancedChat__ChatPopover_CloseIcon} onClick={onClose}>
         <CloseIcon />

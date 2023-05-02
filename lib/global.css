@@ -3,7 +3,14 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
-  --enhancedocs-primary-base: #3663eb;
+  --base-color: 225, 82%; /* #3764eb */
+  --base-lightness: 57%;
+
+  --enhancedocs-primary-lighten2: hsl(var(--base-color), calc(var(--base-lightness) + 20%));
+  --enhancedocs-primary-lighten1: hsl(var(--base-color), calc(var(--base-lightness) + 10%));
+  --enhancedocs-primary-base: hsl(var(--base-color), var(--base-lightness));
+  --enhancedocs-primary-darken1: hsl(var(--base-color), calc(var(--base-lightness) - 10%));
+  --enhancedocs-primary-darken2: hsl(var(--base-color), calc(var(--base-lightness) - 20%));
 
   --enhancedocs-neutral-lighten3: #F7FAFF;
   --enhancedocs-neutral-lighten2: #DEE9FF;

@@ -1,5 +1,5 @@
 .EnhancedSearch__SearchModal__Footer {
-  padding: 16px;
+  padding: 12px;
   background: var(--enhancedocs-white);
   border-radius: 0 0 16px 16px;
 }
@@ -7,11 +7,13 @@
 .EnhancedSearch__SearchModal__FooterLogoContainer {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  font-size: 12px;
 }
 
 .EnhancedSearch__SearchModal__FooterLogo {
-  width: 120px;
+  width: 100px;
 }
 
 .EnhancedSearch__SearchModal__FooterLink {
