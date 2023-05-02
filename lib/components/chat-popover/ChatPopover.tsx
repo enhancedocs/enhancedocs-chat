@@ -3,11 +3,19 @@ import { createPortal } from 'react-dom';
 import { classNames } from '../../helpers/styles';
 import type { Config, Theme } from '../../Chat';
 import SendIcon from '../icons/SendIcon';
-import { getAnswers } from './services/answers';
+import { getAnswers, getAnswersWithHistory } from './services/answers';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import History from './components/history/History';
 import classes from './ChatPopover.module.css';
+
+function formatHistory (history: Array<HistoryItem>) {
+  history.shift(); // Remove initial AI history item.
+  return history.map((historyItem) => {
+    const prefix = historyItem.origin == 'ai' ? 'AI: ' : 'Human: ';
+    return `${prefix}${historyItem.value}`;
+  });
+}
 
 export type HistoryItem = {
   _id: string;
@@ -70,7 +78,11 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
           ];
         });
 
-        const data = await getAnswers({ config, search });
+        const withHistory = history.length > 1;
+        const data = withHistory
+          ? await getAnswersWithHistory({ config, search, history: formatHistory(history) })
+          : await getAnswers({ config, search });
+
         setHistory((prevHistory) => {
           return [
             ...prevHistory,
