@@ -1,6 +1,5 @@
 import { ReactNode, useState } from 'react';
 import useCustomTheme from './hooks/use-custom-theme';
-import useKeyDown from './hooks/use-key-down';
 import { classNames } from './helpers/styles';
 import MagicIcon from './components/icons/MagicIcon';
 import RobotIcon from './components/icons/RobotIcon';
@@ -54,7 +53,6 @@ export default function Chat ({
   }
 
   useCustomTheme(theme);
-  useKeyDown('h', toggleChatPopover);
 
   return (
     <>
@@ -73,12 +71,16 @@ export default function Chat ({
       >
         <Icon />
       </button>
-      <ChatPopover
-        config={config}
-        theme={theme}
-        isOpen={isOpen}
-        onClose={toggleChatPopover}
-      />
+      {
+        typeof window !== 'undefined' && (
+          <ChatPopover
+            config={config}
+            theme={theme}
+            isOpen={isOpen}
+            onClose={toggleChatPopover}
+          />
+        )
+      }
     </>
   );
 }
