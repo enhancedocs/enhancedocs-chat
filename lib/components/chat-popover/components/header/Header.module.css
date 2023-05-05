@@ -25,6 +25,8 @@
 }
 
 .EnhancedChat__ChatPopover_CloseIcon {
+  width: 24px;
+  height: 24px;
   display: flex;
   color: var(--enhancedocs-neutral-darken2);
   cursor: pointer;

@@ -32,16 +32,28 @@
 .EnhancedChat__small {
   width: 48px;
   height: 48px;
-  font-size: 20px;
 }
 .EnhancedChat__middle {
   width: 54px;
   height: 54px;
-  font-size: 24px;
 }
 .EnhancedChat__large {
   width: 60px;
   height: 60px;
+}
+.EnhancedChat__small svg {
+  width: 24px;
+  height: 24px;
+  font-size: 20px;
+}
+.EnhancedChat__middle svg {
+  width: 28px;
+  height: 28px;
+  font-size: 24px;
+}
+.EnhancedChat__large svg {
+  width: 32px;
+  height: 32px;
   font-size: 28px;
 }
 
