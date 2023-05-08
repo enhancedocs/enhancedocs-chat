@@ -9,7 +9,7 @@
   overflow-x: auto;
   background: var(--enhancedocs-white);
   padding: 8px 16px;
-  border-radius: 24px 24px 24px 4px;
+  border-radius: 4px 24px 24px 24px;
   margin-bottom: 4px;
   align-self: flex-start;
 }
@@ -18,7 +18,7 @@
   background: var(--enhancedocs-primary-base);
   color: white;
   margin: 16px 0;
-  border-radius: 24px 24px 4px 24px;
+  border-radius: 24px 4px 24px 24px;
   align-self: flex-end;
 }
 
@@ -42,4 +42,41 @@
 
 .EnhancedChat__ChatPopover__MarkdownParagraph {
   margin: 4px 0;
+}
+
+.EnhancedChat__ChatPopover__FeedbackContainer {
+  float: right;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 4px;
+}
+
+.EnhancedChat__ChatPopover__FeedbackButton {
+  display: flex;
+  padding: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.EnhancedChat__ChatPopover__FeedbackButton:hover {
+  background: var(--enhancedocs-neutral-lighten2);
+}
+
+.EnhancedChat__ChatPopover__FeedbackButton svg {
+  width: 20px;
+  color: var(--enhancedocs-neutral-darken1);
+}
+
+.EnhancedSearch__SearchModal__FeedbackSuccess {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px;
+  color: var(--enhancedocs-neutral-darken2);
+}
+
+.EnhancedSearch__SearchModal__FeedbackSuccess svg {
+  width: 20px;
+  color: var(--enhancedocs-success-base);
 }

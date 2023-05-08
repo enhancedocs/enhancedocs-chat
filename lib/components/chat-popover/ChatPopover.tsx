@@ -3,15 +3,16 @@ import { createPortal } from 'react-dom';
 import { classNames } from '../../helpers/styles';
 import type { Config, Theme } from '../../Chat';
 import SendIcon from '../icons/SendIcon';
-import { getAnswers, getAnswersWithHistory } from './services/answers';
+import { getAnswers, getAnswersWithHistory, answerFeedback } from './services/answers';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import History from './components/history/History';
-import { INITIAL_HISTORY_ID, formatHistory } from './helpers';
+import { INITIAL_HISTORY_ID, formatHistory } from './helpers/history';
+import { processStream } from './helpers/stream';
 import classes from './ChatPopover.module.css';
 
 export type HistoryItem = {
-  _id: string;
+  answerId: string;
   value: string;
   sources?: Array<string>;
   origin: 'ai' | 'human';
@@ -26,7 +27,7 @@ type ChatPopoverProps = {
 
 const INITIAL_HISTORY: Array<HistoryItem> = [
   {
-    _id: INITIAL_HISTORY_ID,
+    answerId: INITIAL_HISTORY_ID,
     value: 'Hi! I\'m EnhanceDocs AI Assistant. Nice to meet you! 👋  \nSearch the docs or ask a question...',
     sources: [],
     origin: 'ai'
@@ -64,7 +65,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
           return [
             ...prevHistory,
             {
-              _id: `human-${prevHistory.length + 1}`,
+              answerId: `human-${prevHistory.length + 1}`,
               value: search,
               origin: 'human'
             }
@@ -76,26 +77,14 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
           ? await getAnswersWithHistory({ config, search, history: formatHistory(history) })
           : await getAnswers({ config, search });
 
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder('utf-8');
-        let result = '';
+        const streamId = `ai-${history.length + 1}`;
 
-        while (true) {
-          const { done, value } = await reader.read();
-
-          if (done) {
-            break;
-          }
-
-          result += decoder.decode(value);
-
-          const streamId = `ai-${history.length + 1}`;
-
+        await processStream(response.body, (result) => {
           setHistory((prevHistory) => {
-            const exists = prevHistory.find(({ _id }) => _id == streamId);
+            const exists = prevHistory.find(({ answerId }) => answerId == streamId);
             if (exists) {
               return prevHistory.map((historyItem) => {
-                if (historyItem._id == streamId) {
+                if (historyItem.answerId == streamId) {
                   return { ...historyItem, value: result };
                 }
                 return historyItem;
@@ -104,7 +93,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
             return [
               ...prevHistory,
               {
-                _id: streamId,
+                answerId: streamId,
                 value: result,
                 sources: [],
                 origin: 'ai'
@@ -115,13 +104,21 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
           if (historyContainerRef.current) {
             historyContainerRef.current.scrollTop = historyContainerRef.current.scrollHeight;
           }
-        }
+        });
       }
     } catch(error) {
       console.error('Chat answers', error);
     } finally {
       setSearch('');
       setLoadingAnswer(false);
+    }
+  }
+
+  async function handleFeedback ({ answerId, usefulFeedback }: { answerId: string, usefulFeedback: boolean }) {
+    try {
+      // await answerFeedback({ answerId, usefulFeedback, config });
+    } catch (error) {
+      console.error('Chat Feedback', error);
     }
   }
 
@@ -156,7 +153,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
         >
           {
             history.length
-              ? <History history={history} />
+              ? <History history={history} onFeedback={handleFeedback} loadingAnswer={loadingAnswer} />
               : null
           }
           {
