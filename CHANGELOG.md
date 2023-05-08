@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.0] - 2023-05-08
+
+- 🆕 Answer feedback UX/UI ([#8](https://github.com/enhancedocs/enhancedocs-chat/issues/8)).
+
 ## [0.0.12] - 2023-05-05
 
 - 🐞 Floating button SVG width/height.
