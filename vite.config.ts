@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 const PACKAGE_NAME = 'EnhancedocsChat';
 
@@ -28,7 +29,8 @@ export default defineConfig({
           'react': 'React',
           'react-dom': 'ReactDOM'
         }
-      }
+      },
+      plugins: [nodePolyfills()]
     },
     emptyOutDir: false,
     copyPublicDir: false
