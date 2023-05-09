@@ -19,12 +19,12 @@ export default defineConfig({
       entry: './lib/index.ts'
     },
     rollupOptions: {
-      external: ['react'],
+      external: ['react', 'react-dom'],
       output: {
         name: PACKAGE_NAME,
-        exports:'named',
         globals: {
-          react: 'React'
+          'react': 'React',
+          'react-dom': 'ReactDOM'
         }
       }
     },

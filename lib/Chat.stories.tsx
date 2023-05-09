@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Chat from './Chat';
+import { renderChat } from './render-chat';
 
 const ENHANCED_CONFIG = {
   projectId: '642c2d009557653a6d46cdda',
@@ -53,4 +54,13 @@ CustomTheme.args = {
     botName: 'Bob',
     logo: <img src="/chatgpt-logo.png" alt="ChatGPT Logo" />
   }
+};
+
+export const RenderChat = () => {
+  useEffect(() => {
+    const props = { config: ENHANCED_CONFIG };
+    renderChat('chat', props);
+  }, []);
+
+  return <div id="chat"></div>;
 };
