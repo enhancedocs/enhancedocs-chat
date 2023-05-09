@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.2] - 2023-05-09
+
+- 🛠 Vite: Added named export and specific fileName `{format}.js`.
+
 ## [0.1.1] - 2023-05-09
 
 - 🆕 `loadScript` and `renderChat` utilities to use Chat component in any JS project ([#10](https://github.com/enhancedocs/enhancedocs-chat/issues/10)).

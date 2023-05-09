@@ -16,12 +16,14 @@ export default defineConfig({
   build: {
     lib: {
       name: PACKAGE_NAME,
-      entry: './lib/index.ts'
+      entry: './lib/index.ts',
+      fileName: (format) => `enhancedocs-chat.${format}.js`
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
       output: {
         name: PACKAGE_NAME,
+        exports: 'named',
         globals: {
           'react': 'React',
           'react-dom': 'ReactDOM'
