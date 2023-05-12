@@ -50,9 +50,12 @@ export const CustomTheme = Template.bind({});
 CustomTheme.args = {
   config: ENHANCED_CONFIG,
   theme: {
-    primaryColor: '#9692ff',
+    primaryColor: '#009485',
     botName: 'Bob',
-    logo: <img src="/chatgpt-logo.png" alt="ChatGPT Logo" />
+    logo: {
+      src: '/chatgpt-logo.png',
+      alt: 'ChatGPT Logo'
+    }
   }
 };
 

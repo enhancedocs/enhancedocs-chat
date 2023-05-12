@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.0] - 2023-05-12
+
+- 🆕 Render chat documentation and helpers.
+- 🆕 Set global style `--base-color` when customising `theme.primaryColor` to improve primary variations.
+- 🐞 Support for `theme.logo` in any project. From ReactNode to object to be used without using JSX.
+
 ## [0.1.3] - 2023-05-09
 
 - 🛠 Build: Rollup Node Polyfills.

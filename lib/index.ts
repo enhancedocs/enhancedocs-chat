@@ -1,2 +1,2 @@
 export { default } from './Chat';
-export { loadScript, renderChat } from './render-chat';
+export { loadScript, appendGlobalStyles, renderChat } from './render-chat';

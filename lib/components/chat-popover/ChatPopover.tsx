@@ -25,25 +25,27 @@ type ChatPopoverProps = {
   onClose?: () => void;
 }
 
-const INITIAL_HISTORY: Array<HistoryItem> = [
-  {
-    answerId: INITIAL_HISTORY_ID,
-    value: 'Hi! I\'m EnhanceDocs AI Assistant. Nice to meet you! 👋  \nSearch the docs or ask a question...',
-    sources: [],
-    origin: 'ai'
-  }
-];
+function INITIAL_HISTORY (botName: string | undefined): Array<HistoryItem> {
+  return [
+    {
+      answerId: INITIAL_HISTORY_ID,
+      value: `Hi! I'm ${botName || 'EnhanceDocs AI Assistant'}. Nice to meet you! 👋  \nSearch the docs or ask a question...`,
+      sources: [],
+      origin: 'ai'
+    }
+  ];
+}
 
 export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPopoverProps) {
   const historyContainerRef = useRef<HTMLDivElement>(null);
-  const [history, setHistory] = useState<Array<HistoryItem>>(INITIAL_HISTORY);
+  const [history, setHistory] = useState<Array<HistoryItem>>(INITIAL_HISTORY(theme?.botName));
   const [search, setSearch] = useState('');
   const [loadingAnswer, setLoadingAnswer] = useState(false);
 
   function handleClose () {
     if (onClose) onClose();
     setSearch('');
-    setHistory(INITIAL_HISTORY);
+    setHistory(INITIAL_HISTORY(theme?.botName));
   }
 
   function handleSearchChange (event: ChangeEvent<HTMLInputElement>) {
