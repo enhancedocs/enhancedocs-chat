@@ -9,10 +9,10 @@ export function loadScript (src: string, onLoadCallback: () => void) {
   document.head.appendChild(script);
 }
 
-function appendGlobalStyles () {
+export function appendGlobalStyles (href: string) {
   const linkElement = document.createElement('link');
   linkElement.rel = 'stylesheet';
-  linkElement.href = 'https://unpkg.com/enhancedocs-chat/dist/style.css';
+  linkElement.href = href || 'https://unpkg.com/enhancedocs-chat/dist/style.css';
   document.head.appendChild(linkElement);
 }
 
@@ -23,6 +23,6 @@ export function renderChat (elementId: string, props: ChatProps) {
     const root = createRoot(domNode);
     root.render(<Chat {...props} />);
 
-    appendGlobalStyles();
+    return root;
   }
 }

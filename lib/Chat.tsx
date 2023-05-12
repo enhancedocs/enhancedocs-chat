@@ -27,7 +27,7 @@ export type Config = {
 export type Theme = {
   primaryColor?: string;
   botName?: string;
-  logo?: ReactNode;
+  logo?: { src: string, alt?: string };
 }
 
 export type ChatProps = {
