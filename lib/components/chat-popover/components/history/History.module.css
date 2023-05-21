@@ -5,7 +5,7 @@
 
 .EnhancedChat__ChatPopover__HistoryItem {
   width: fit-content;
-  max-width: -webkit-fill-available;
+  max-width: 80%;
   overflow-x: auto;
   background: var(--enhancedocs-white);
   padding: 8px 16px;
@@ -44,6 +44,48 @@
   margin: 4px 0;
 }
 
+.EnhancedChat__ChatPopover__SourcesContainer {
+  display: block
+}
+
+.EnhancedChat__ChatPopover__SourcesContainerFullScreen {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.EnhancedChat__ChatPopover__SourcesTitle {
+  margin: 16px 0;
+}
+
+.EnhancedChat__ChatPopover__SourceItem {
+  width: auto;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  background: var(--enhancedocs-white);
+  margin: 8px;
+  padding: 8px 12px;
+  border-radius: 16px;
+  text-decoration: auto;
+  color: var(--enhancedocs-primary-base);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: inset 0 -1px 0 0 rgb(190 206 237), inset 0 0 1px 1px #fff, 0 1px 2px 0px rgb(190 206 237 / 90%);
+}
+
+.EnhancedChat__ChatPopover__SourceItemFullScreen {
+  width: fit-content;
+}
+
+.EnhancedChat__ChatPopover__SourceItem svg {
+  width: 20px;
+}
+
+.EnhancedChat__ChatPopover__SourceItem:hover {
+  text-decoration: underline;
+}
+
 .EnhancedChat__ChatPopover__FeedbackContainer {
   float: right;
   display: flex;
@@ -68,7 +110,7 @@
   color: var(--enhancedocs-neutral-darken1);
 }
 
-.EnhancedSearch__SearchModal__FeedbackSuccess {
+.EnhancedChat__ChatPopover__FeedbackSuccess {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -76,7 +118,7 @@
   color: var(--enhancedocs-neutral-darken2);
 }
 
-.EnhancedSearch__SearchModal__FeedbackSuccess svg {
+.EnhancedChat__ChatPopover__FeedbackSuccess svg {
   width: 20px;
   color: var(--enhancedocs-success-base);
 }

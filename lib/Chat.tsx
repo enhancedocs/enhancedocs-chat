@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 import useCustomTheme from './hooks/use-custom-theme';
 import { classNames } from './helpers/styles';
 import MagicIcon from './components/icons/MagicIcon';
@@ -6,7 +6,7 @@ import RobotIcon from './components/icons/RobotIcon';
 import HelpIcon from './components/icons/HelpIcon';
 import ChatIcon from './components/icons/ChatIcon';
 import SmilyChatIcon from './components/icons/SmilyChatIcon';
-import ChatPopover from './components/chat-popover/ChatPopover';
+import ChatPopover from './components/chat-popover';
 import classes from './Chat.module.css';
 import './global.css';
 

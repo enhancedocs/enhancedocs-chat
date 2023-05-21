@@ -3,6 +3,8 @@ import { classNames } from '../../../../helpers/styles';
 import CheckCircleIcon from '../../../icons/CheckCircleIcon';
 import ThumbDownIcon from '../../../icons/ThumbDownIcon';
 import ThumbUpIcon from '../../../icons/ThumbUpIcon';
+import LinkIcon from '../../../icons/LinkIcon';
+import { usePopover } from '../../context';
 import type { HistoryItem } from '../../ChatPopover';
 import classes from './History.module.css';
 
@@ -16,6 +18,7 @@ type HistoryProps = {
 
 export default function History ({ history, onFeedback, loadingAnswer }: HistoryProps)  {
   const [submittedFeedback, setSubmittedFeedback] = useState<{ [key: string]: boolean }>({});
+  const { isFullScreen } = usePopover();
 
   function handleFeedback ({ answerId, usefulFeedback }: { answerId: string, usefulFeedback: boolean }) {
     setSubmittedFeedback((prevSubmittedFeedback) => ({ ...prevSubmittedFeedback, [answerId]: true }));
@@ -57,6 +60,50 @@ export default function History ({ history, onFeedback, loadingAnswer }: History
               </ReactMarkdown>
             </Suspense>
             {
+              historyItem.sources?.length
+                ? (
+                  <div>
+                    <p className={classes.EnhancedChat__ChatPopover__SourcesTitle}>
+                      Summary generated from the following resources:
+                    </p>
+                    <div
+                      className={
+                        classNames(
+                          classes.EnhancedChat__ChatPopover__SourcesContainer,
+                          isFullScreen && classes.EnhancedChat__ChatPopover__SourcesContainerFullScreen
+                        )
+                      }
+                    >
+                      {
+                        historyItem.sources.map((source, index) => {
+                          const urlParts = source.split('/');
+                          const label = (urlParts ? urlParts[urlParts.length - 1] : source)
+                            .split(/[-_]/)
+                            .map(word => word.replace(word[0], word[0].toUpperCase()))
+                            .join(' ');
+
+                          return (
+                            <a
+                              key={`source-${index}`}
+                              className={
+                                classNames(
+                                  classes.EnhancedChat__ChatPopover__SourceItem,
+                                  isFullScreen && classes.EnhancedChat__ChatPopover__SourceItemFullScreen
+                                )
+                              }
+                              href={source}
+                            >
+                              <LinkIcon />
+                              {label}
+                            </a>
+                          );
+                        })
+                      }
+                    </div>
+                  </div>
+                ) : null
+            }
+            {
               historyItem.origin == 'ai' && !isFirst && !isProcessing && (
                 submittedFeedback[historyItem.answerId]
                   ? (
@@ -64,7 +111,7 @@ export default function History ({ history, onFeedback, loadingAnswer }: History
                       className={
                         classNames(
                           classes.EnhancedChat__ChatPopover__FeedbackContainer,
-                          classes.EnhancedSearch__SearchModal__FeedbackSuccess
+                          classes.EnhancedChat__ChatPopover__FeedbackSuccess
                         )
                       }
                     >

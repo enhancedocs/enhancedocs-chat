@@ -3,7 +3,7 @@
   bottom: 20px;
   right: 20px;
   width: 370px;
-  min-height: 600px;
+  min-height: 100%;
   max-width: calc(100% - 40px);
   max-height: calc(100% - 40px);
   display: flex;
@@ -29,9 +29,16 @@
 }
 
 .EnhancedChat__ChatPopover_Content {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-height: 100%;
+  padding-bottom: 64px;
+}
+
+.EnhancedChat__ChatPopover_ContentFullScreen {
+  min-height: inherit;
 }
 
 .EnhancedChat__ChatPopover_ContentLoading {
@@ -41,7 +48,7 @@
 .EnhancedChat__ChatPopover_ContentHistory {
   flex: 1;
   padding: 16px;
-  max-height: 426px;
+  max-height: calc(100% - 96px);
   font-size: 14px;
   overflow-y: auto;
   scroll-behavior: smooth;
@@ -53,6 +60,9 @@
   gap: 8px;
   padding: 12px 16px;
   background: var(--enhancedocs-neutral-lighten2);
+  position: absolute;
+  bottom: 0;
+  width: -webkit-fill-available;
 }
 
 .EnhancedChat__ChatPopover_FormInput {
@@ -83,7 +93,6 @@
   cursor: pointer;
   border: none;
   outline: none;
-  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,6 +112,10 @@
 
 .EnhancedChat__ChatPopover_FormButton:disabled svg {
   fill: var(--enhancedocs-neutral-base);
+}
+
+.EnhancedChat__ChatPopover_FormButtonFullScreen {
+  display: none;
 }
 
 .EnhancedChat__ChatPopover_Loading {
@@ -145,6 +158,27 @@
   background-color: var(--enhancedocs-primary-base);
   color: var(--enhancedocs-primary-base);
   animation: stretching-after 1s infinite ease-in;
+}
+
+@media (min-width: 600px) {
+  .EnhancedChat__ChatPopover {
+    width: 450px;
+    min-height: 650px;
+  }
+
+  .EnhancedChat__ChatPopoverFullScreen {
+    width: 100%;
+    min-height: calc(100% - 40px);
+  }
+
+  .EnhancedChat__ChatPopover_ContentHistory {
+    max-height: calc(100% - 96px);
+  }
+
+  .EnhancedChat__ChatPopover_FormButtonFullScreen {
+    display: flex;
+    width: 28px;
+  }
 }
 
 @keyframes stretching {
