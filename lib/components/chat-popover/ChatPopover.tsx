@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom';
 import { classNames } from '../../helpers/styles';
 import type { Config, Theme } from '../../Chat';
 import SendIcon from '../icons/SendIcon';
+import FullScreenFillIcon from '../icons/FullScreenFillIcon';
+import FullScreenExitIcon from '../icons/FullScreenExitIcon';
 import { getAnswers, getAnswersWithHistory, answerFeedback } from './services/answers';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
@@ -41,6 +43,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
   const [history, setHistory] = useState<Array<HistoryItem>>(INITIAL_HISTORY(theme?.botName));
   const [search, setSearch] = useState('');
   const [loadingAnswer, setLoadingAnswer] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   function handleClose () {
     if (onClose) onClose();
@@ -136,7 +139,8 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
         classNames(
           classes.EnhancedChat__ChatPopover,
           isOpen && classes.EnhancedChat__ChatPopoverVisible,
-          !isOpen && classes.EnhancedChat__ChatPopoverHidden
+          !isOpen && classes.EnhancedChat__ChatPopoverHidden,
+          isFullScreen && classes.EnhancedChat__ChatPopoverFullScreen
         )
       }
     >
@@ -145,6 +149,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
         className={
           classNames(
             classes.EnhancedChat__ChatPopover_Content,
+            isFullScreen && classes.EnhancedChat__ChatPopover_ContentFullScreen,
             loadingAnswer && classes.EnhancedChat__ChatPopover_ContentLoading
           )
         }
@@ -171,6 +176,17 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
           name="enhancedchat-form"
           onSubmit={handleSearchAnswers}
         >
+          <div
+            className={
+              classNames(
+                classes.EnhancedChat__ChatPopover_FormButton,
+                classes.EnhancedChat__ChatPopover_FormButtonFullScreen
+              )
+            }
+            onClick={() => setIsFullScreen((previous) => !previous)}
+          >
+            {isFullScreen ? <FullScreenExitIcon /> : <FullScreenFillIcon />}
+          </div>
           <input
             className={classes.EnhancedChat__ChatPopover_FormInput}
             name="search"

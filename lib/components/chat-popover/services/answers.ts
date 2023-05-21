@@ -30,7 +30,10 @@ export function getAnswers ({ config, search }: GetAnswers): Promise<any> {
   if (config.projectId) url = `${url}&projectId=${config.projectId}`;
 
   return Get(url, config, {
-    headers: { Authorization: `Bearer ${config.accessToken}` },
+    headers: {
+      Authorization: `Bearer ${config.accessToken}`,
+      // 'X-EnhanceDocs-Version': '1.0'
+    },
     stream: true
   });
 }
@@ -43,7 +46,8 @@ export function getAnswersWithHistory ({ config, search, history }: GetAnswersWi
     headers: {
       Authorization: `Bearer ${config.accessToken}`,
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      // 'X-EnhanceDocs-Version': '1.0'
     },
     body: JSON.stringify({
       question: search,
