@@ -1,7 +1,7 @@
-export async function processStream (stream: ReadableStream, callback: (result: string) => void) {
+export async function processStream (stream: ReadableStream, callback: (text: string, result?: any) => void) {
   const reader = stream.getReader();
   const decoder = new TextDecoder('utf-8');
-  let result = '';
+  let text = '';
 
   while (true) {
     const { done, value } = await reader.read();
@@ -10,8 +10,20 @@ export async function processStream (stream: ReadableStream, callback: (result: 
       break;
     }
 
-    result += decoder.decode(value);
+    const chunk = decoder.decode(value, { stream: true });
 
-    if (callback) callback(result);
+    try {
+      const result = JSON.parse(chunk);
+      if (result.answerId) {
+        callback(text, result);
+        break;
+      } else {
+        text += chunk;
+        callback(text, undefined);
+      }
+    } catch (error) {
+      text += chunk;
+      callback(text, undefined);
+    }
   }
 }

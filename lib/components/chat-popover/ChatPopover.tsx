@@ -5,16 +5,16 @@ import type { Config, Theme } from '../../Chat';
 import SendIcon from '../icons/SendIcon';
 import FullScreenFillIcon from '../icons/FullScreenFillIcon';
 import FullScreenExitIcon from '../icons/FullScreenExitIcon';
-import { getAnswers, getAnswersWithHistory, answerFeedback } from './services/answers';
+import { getAnswers, answerFeedback } from './services/answers';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import History from './components/history/History';
-import { INITIAL_HISTORY_ID, formatHistory } from './helpers/history';
 import { processStream } from './helpers/stream';
 import classes from './ChatPopover.module.css';
 
 export type HistoryItem = {
   answerId: string;
+  threadId?: string;
   value: string;
   sources?: Array<string>;
   origin: 'ai' | 'human';
@@ -27,10 +27,13 @@ type ChatPopoverProps = {
   onClose?: () => void;
 }
 
+const INITIAL_HISTORY_ID = 'ai-0';
+
 function INITIAL_HISTORY (botName: string | undefined): Array<HistoryItem> {
   return [
     {
       answerId: INITIAL_HISTORY_ID,
+      threadId: undefined,
       value: `Hi! I'm ${botName || 'EnhanceDocs AI Assistant'}. Nice to meet you! 👋  \nSearch the docs or ask a question...`,
       sources: [],
       origin: 'ai'
@@ -77,29 +80,34 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
           ];
         });
 
-        const withHistory = history.length > 1;
-        const response = withHistory
-          ? await getAnswersWithHistory({ config, search, history: formatHistory(history) })
-          : await getAnswers({ config, search });
-
+        const aiHistory = history.filter(({ origin }) => origin == 'ai');
+        const lastAiItem = aiHistory[aiHistory.length - 1];
+        console.log('lastAiItem', lastAiItem);
+        const response = await getAnswers({ config, search, threadId: lastAiItem?.threadId });
         const streamId = `ai-${history.length + 1}`;
 
-        await processStream(response.body, (result) => {
+        await processStream(response.body, (text, result: HistoryItem) => {
           setHistory((prevHistory) => {
             const exists = prevHistory.find(({ answerId }) => answerId == streamId);
             if (exists) {
               return prevHistory.map((historyItem) => {
                 if (historyItem.answerId == streamId) {
-                  return { ...historyItem, value: result };
+                  return {
+                    ...historyItem,
+                    value: text,
+                    answerId: result ? result.answerId : streamId,
+                    threadId: result ? result.threadId : undefined,
+                    sources: result ? result.sources : [],
+                  };
                 }
                 return historyItem;
               });
             }
             return [
-              ...prevHistory,
-              {
+              ...prevHistory, {
+                value: text,
                 answerId: streamId,
-                value: result,
+                threadId: undefined,
                 sources: [],
                 origin: 'ai'
               }
@@ -121,7 +129,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
 
   async function handleFeedback ({ answerId, usefulFeedback }: { answerId: string, usefulFeedback: boolean }) {
     try {
-      // await answerFeedback({ answerId, usefulFeedback, config });
+      await answerFeedback({ answerId, usefulFeedback, config });
     } catch (error) {
       console.error('Chat Feedback', error);
     }

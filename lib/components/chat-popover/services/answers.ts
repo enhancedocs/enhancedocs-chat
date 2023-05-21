@@ -11,12 +11,7 @@ export type AnswerType = {
 type GetAnswers = {
   config: Config;
   search: string;
-}
-
-type GetAnswersWithHistory = {
-  config: Config;
-  search: string;
-  history?: Array<string>;
+  threadId?: string;
 }
 
 type AnswerFeedbackType = {
@@ -25,34 +20,16 @@ type AnswerFeedbackType = {
   config: Config;
 }
 
-export function getAnswers ({ config, search }: GetAnswers): Promise<any> {
+export function getAnswers ({ config, search, threadId }: GetAnswers): Promise<any> {
   let url = `/ask/stream?question=${search}`;
   if (config.projectId) url = `${url}&projectId=${config.projectId}`;
+  if (threadId) url = `${url}&threadId=${threadId}`;
 
   return Get(url, config, {
     headers: {
       Authorization: `Bearer ${config.accessToken}`,
-      // 'X-EnhanceDocs-Version': '1.0'
+      'X-EnhanceDocs-Version': '1.0'
     },
-    stream: true
-  });
-}
-
-export function getAnswersWithHistory ({ config, search, history }: GetAnswersWithHistory): Promise<any> {
-  let url = '/ask/stream';
-  if (config.projectId) url = `${url}?projectId=${config.projectId}`;
-
-  return Post(url, config, {
-    headers: {
-      Authorization: `Bearer ${config.accessToken}`,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      // 'X-EnhanceDocs-Version': '1.0'
-    },
-    body: JSON.stringify({
-      question: search,
-      history
-    }),
     stream: true
   });
 }
