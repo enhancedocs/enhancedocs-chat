@@ -5,6 +5,7 @@ import type { Config, Theme } from '../../Chat';
 import SendIcon from '../icons/SendIcon';
 import FullScreenFillIcon from '../icons/FullScreenFillIcon';
 import FullScreenExitIcon from '../icons/FullScreenExitIcon';
+import { usePopover } from './context';
 import { getAnswers, answerFeedback } from './services/answers';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
@@ -20,7 +21,7 @@ export type HistoryItem = {
   origin: 'ai' | 'human';
 }
 
-type ChatPopoverProps = {
+export type ChatPopoverProps = {
   config: Config;
   theme?: Theme;
   isOpen: boolean;
@@ -46,7 +47,7 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
   const [history, setHistory] = useState<Array<HistoryItem>>(INITIAL_HISTORY(theme?.botName));
   const [search, setSearch] = useState('');
   const [loadingAnswer, setLoadingAnswer] = useState(false);
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  const { isFullScreen, setIsFullScreen } = usePopover();
 
   function handleClose () {
     if (onClose) onClose();
@@ -82,8 +83,9 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
 
         const aiHistory = history.filter(({ origin }) => origin == 'ai');
         const lastAiItem = aiHistory[aiHistory.length - 1];
-        console.log('lastAiItem', lastAiItem);
+
         const response = await getAnswers({ config, search, threadId: lastAiItem?.threadId });
+
         const streamId = `ai-${history.length + 1}`;
 
         await processStream(response.body, (text, result: HistoryItem) => {
