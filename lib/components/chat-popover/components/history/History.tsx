@@ -76,10 +76,12 @@ export default function History ({ history, onFeedback, loadingAnswer }: History
                     >
                       {
                         historyItem.sources.map((source, index) => {
-                          const urlParts = source.split('/');
-                          const label = (urlParts ? urlParts[urlParts.length - 1] : source)
+                          const urlParts = source.split('/').filter(part => part.trim().length > 0);
+                          const lastSectionIndex = urlParts.length > 1 ? urlParts.length - 1 : 0;
+
+                          const label = urlParts[lastSectionIndex]
                             .split(/[-_]/)
-                            .map(word => word.replace(word[0], word[0].toUpperCase()))
+                            .map(word => word && word.length > 0 ? word.replace(word[0], word[0].toUpperCase()) : "")
                             .join(' ');
 
                           return (
