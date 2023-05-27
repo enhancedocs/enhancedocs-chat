@@ -81,7 +81,7 @@ export default function History ({ history, onFeedback, loadingAnswer }: History
 
                           const label = urlParts[lastSectionIndex]
                             .split(/[-_]/)
-                            .map(word => word && word.length > 0 ? word.replace(word[0], word[0].toUpperCase()) : "")
+                            .map(word => word && word.length > 0 ? word.replace(word[0], word[0].toUpperCase()) : '')
                             .join(' ');
 
                           return (

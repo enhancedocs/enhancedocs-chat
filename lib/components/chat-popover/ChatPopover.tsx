@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import mixpanel from 'mixpanel-browser';
 import { classNames } from '../../helpers/styles';
 import type { Config, Theme } from '../../Chat';
 import SendIcon from '../icons/SendIcon';
@@ -63,6 +64,12 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
     event.preventDefault();
 
     try {
+      if (!config.telemetryDisabled) {
+        mixpanel.track('Question Asked', {
+          'channel': 'DOCUMENTATION',
+          'type': 'CHAT'
+        });
+      }
       setLoadingAnswer(true);
 
       const data = new FormData(event.target as HTMLFormElement);
@@ -131,6 +138,12 @@ export default function ChatPopover ({ config, theme, isOpen, onClose }: ChatPop
 
   async function handleFeedback ({ answerId, usefulFeedback }: { answerId: string, usefulFeedback: boolean }) {
     try {
+      if (!config.telemetryDisabled) {
+        mixpanel.track('Shared Feedback', {
+          'channel': 'DOCUMENTATION',
+          'type': 'CHAT'
+        });
+      }
       await answerFeedback({ answerId, usefulFeedback, config });
     } catch (error) {
       console.error('Chat Feedback', error);

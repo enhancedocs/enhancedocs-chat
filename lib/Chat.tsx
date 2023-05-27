@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
+import mixpanel from 'mixpanel-browser';
 import useCustomTheme from './hooks/use-custom-theme';
 import { classNames } from './helpers/styles';
 import MagicIcon from './components/icons/MagicIcon';
@@ -22,6 +23,7 @@ export type Config = {
   projectId: string;
   accessToken: string;
   apiBaseURL?: string;
+  telemetryDisabled?: boolean;
 }
 
 export type Theme = {
@@ -51,6 +53,14 @@ export default function Chat ({
   function toggleChatPopover() {
     setIsOpen((prevOpen) => !prevOpen);
   }
+
+  useEffect(() => {
+    if (!config.telemetryDisabled) {
+      const isDev = process.env.NODE_ENV === 'development';
+      const token = isDev ? '4c52247f066a41858fdb60e2ca5a8cfc' : '9b06d52b4a508ae7602e58852ea63562';
+      mixpanel.init(token, { debug: process.env.NODE_ENV === 'development' });
+    }
+  }, []);
 
   useCustomTheme(theme);
 
