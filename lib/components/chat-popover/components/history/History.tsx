@@ -45,6 +45,9 @@ export default function History ({ history, onFeedback, loadingAnswer }: History
             <Suspense fallback={<></>}>
               <ReactMarkdown
                 components={{
+                  pre(props) {
+                    return <pre className={classes.EnhancedChat__ChatPopover__MarkdownPre} {...props} />;
+                  },
                   code(props) {
                     return <code className={classes.EnhancedChat__ChatPopover__MarkdownCode} {...props} />;
                   },

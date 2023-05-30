@@ -23,11 +23,16 @@
 }
 
 .EnhancedChat__ChatPopover__MarkdownCode {
-  display: block;
   background: var(--enhancedocs-neutral-lighten2);
+  padding: 0px 4px;
+  border-radius: 4px;
+  overflow-x: scroll;
+}
+
+.EnhancedChat__ChatPopover__MarkdownPre {
+  background: var(--enhancedocs-neutral-lighten3);
   padding: 8px;
   border-radius: 4px;
-  margin: 8px 0;
   overflow-x: scroll;
 }
 
