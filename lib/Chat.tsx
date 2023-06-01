@@ -56,9 +56,9 @@ export default function Chat ({
 
   useEffect(() => {
     if (!config.telemetryDisabled) {
-      const isDev = process.env.NODE_ENV === 'development';
+      const isDev = typeof process !== 'undefined' && process.env.NODE_ENV === 'development';
       const token = isDev ? '4c52247f066a41858fdb60e2ca5a8cfc' : '9b06d52b4a508ae7602e58852ea63562';
-      mixpanel.init(token, { debug: process.env.NODE_ENV === 'development' });
+      mixpanel.init(token, { debug: isDev });
     }
   }, []);
 
