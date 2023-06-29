@@ -27,6 +27,8 @@
   padding: 0px 4px;
   border-radius: 4px;
   overflow-x: scroll;
+  color: var(--enhancedocs-black);
+  line-height: 1;
 }
 
 .EnhancedChat__ChatPopover__MarkdownPre {
@@ -34,6 +36,7 @@
   padding: 8px;
   border-radius: 4px;
   overflow-x: scroll;
+  color: var(--enhancedocs-black);
 }
 
 .EnhancedChat__ChatPopover__MarkdownLink {
