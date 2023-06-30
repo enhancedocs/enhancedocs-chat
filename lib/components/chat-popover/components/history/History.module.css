@@ -26,16 +26,14 @@
   background: var(--enhancedocs-neutral-lighten2);
   padding: 0px 4px;
   border-radius: 4px;
-  overflow-x: scroll;
   color: var(--enhancedocs-black);
-  line-height: 1;
 }
 
 .EnhancedChat__ChatPopover__MarkdownPre {
   background: var(--enhancedocs-neutral-lighten3);
   padding: 8px;
   border-radius: 4px;
-  overflow-x: scroll;
+  overflow-x: auto;
   color: var(--enhancedocs-black);
 }
 
