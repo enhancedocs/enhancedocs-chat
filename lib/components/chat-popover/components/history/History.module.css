@@ -26,7 +26,7 @@
   background: var(--enhancedocs-neutral-lighten2);
   padding: 0px 4px;
   border-radius: 4px;
-  color: var(--enhancedocs-black);
+  color: var(--enhancedocs-black) !important;
 }
 
 .EnhancedChat__ChatPopover__MarkdownPre {
@@ -34,12 +34,12 @@
   padding: 8px;
   border-radius: 4px;
   overflow-x: auto;
-  color: var(--enhancedocs-black);
+  color: var(--enhancedocs-black) !important;
 }
 
 .EnhancedChat__ChatPopover__MarkdownLink {
   text-decoration: auto;
-  color: var(--enhancedocs-primary-base);
+  color: var(--enhancedocs-primary-base) !important;
 }
 
 .EnhancedChat__ChatPopover__MarkdownLink:hover {
@@ -48,6 +48,7 @@
 
 .EnhancedChat__ChatPopover__MarkdownParagraph {
   margin: 4px 0;
+  color: var(--enhancedocs-black) !important;
 }
 
 .EnhancedChat__ChatPopover__SourcesContainer {
