@@ -37,6 +37,11 @@
   color: var(--enhancedocs-black) !important;
 }
 
+.EnhancedChat__ChatPopover__MarkdownPre code {
+  background: var(--enhancedocs-neutral-lighten3);
+  color: var(--enhancedocs-black);
+}
+
 .EnhancedChat__ChatPopover__MarkdownLink {
   text-decoration: auto;
   color: var(--enhancedocs-primary-base) !important;
