@@ -7,6 +7,7 @@
   width: fit-content;
   max-width: 80%;
   overflow-x: auto;
+  color: var(--enhancedocs-black);
   background: var(--enhancedocs-white);
   padding: 8px 16px;
   border-radius: 4px 24px 24px 24px;
@@ -16,7 +17,7 @@
 
 .EnhancedChat__ChatPopover__HistoryItemHuman {
   background: var(--enhancedocs-primary-base);
-  color: white;
+  color: var(--enhancedocs-white);
   margin: 16px 0;
   border-radius: 24px 4px 24px 24px;
   align-self: flex-end;
@@ -53,7 +54,6 @@
 
 .EnhancedChat__ChatPopover__MarkdownParagraph {
   margin: 4px 0;
-  color: var(--enhancedocs-black) !important;
 }
 
 .EnhancedChat__ChatPopover__SourcesContainer {
